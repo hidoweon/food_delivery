@@ -8,8 +8,8 @@ class RecommendedProductController extends GetxController{
 
   RecommendedProductController({required this.recommendedProductRepo});
 
-  List<dynamic> _recommendedProductList = [];
-  List<dynamic> get recommendedProductList => _recommendedProductList;
+  List<ProductModels> _recommendedProductList = [];
+  List<ProductModels> get recommendedProductList => _recommendedProductList;
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
@@ -18,13 +18,10 @@ class RecommendedProductController extends GetxController{
     Response response = await recommendedProductRepo.getRecommendedProductList();
 
     if(response.statusCode == 200){
-      print("got product recommended");
       _recommendedProductList = [];
       _recommendedProductList.addAll(Product.fromJson(response.body).products);
-      _isLoaded = false;
+      _isLoaded = true;
       update();
-    }else{
-      print("fail");
     }
   }
 }

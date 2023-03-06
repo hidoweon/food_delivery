@@ -1,26 +1,37 @@
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/expandable_text_widget.dart';
+import 'package:get/get.dart';
 
+import '../../utils/app_constants.dart';
 import '../../widgets/big_texts.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: Dimensions.height10*7,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
@@ -28,7 +39,6 @@ class RecommendedFoodDetail extends StatelessWidget {
               preferredSize: Size.fromHeight(20),
               child: Container(
                 padding: EdgeInsets.only(top: Dimensions.height5, bottom: Dimensions.height10),
-                child: Center(child: BigText(text: "Chinese Side", size: Dimensions.font26,)),
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -36,15 +46,17 @@ class RecommendedFoodDetail extends StatelessWidget {
                       topLeft: Radius.circular(Dimensions.radius10*2)),
                   color: Colors.white
                 ),
+                child: Center(child: BigText(text: product.name!, size: Dimensions.font26,)),
               ),
             ),
             pinned: true,
             backgroundColor: Colors.yellow,
             expandedHeight: Dimensions.height10*30,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset("assets/image/food2.png",
-              width: double.maxFinite,
-              fit: BoxFit.cover,),
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
+                width: double.maxFinite,
+                fit: BoxFit.cover,),
             ),
           ),
           SliverToBoxAdapter(
@@ -52,7 +64,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(left: Dimensions.width10*2, right: Dimensions.width10*2),
-                  child: ExpandableTextWidget(text: "사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다. 사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다. 사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다. 사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다. 사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다. 사회적 특수계급의 제도는 인정되지 아니하며, 어떠한 형태로도 이를 창설할 수 없다. 모든 국민은 법 앞에 평등하다. 누구든지 성별·종교 또는 사회적 신분에 의하여 정치적·경제적·사회적·문화적 생활의 모든 영역에 있어서 차별을 받지 아니한다. 정부는 회계연도마다 예산안을 편성하여 회계연도 개시 90일전까지 국회에 제출하고, 국회는 회계연도 개시 30일전까지 이를 의결하여야 한다. 군인 또는 군무원이 아닌 국민은 대한민국의 영역안에서는 중대한 군사상 기밀·초병·초소·유독음식물공급·포로·군용물에 관한 죄중 법률이 정한 경우와 비상계엄이 선포된 경우를 제외하고는 군사법원의 재판을 받지 아니한다.")
+                  child: ExpandableTextWidget(text: product.description!)
                 ),
               ],
             ),
@@ -71,11 +83,12 @@ class RecommendedFoodDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(
-                  icon: Icons.add,
+                  icon: Icons.remove,
                   iconColor: Colors.white,
                   backgroundColor: Colors.blue,),
+                BigText(text: "\$ ${product.price!} X 0", color: Colors.blue,),
                 AppIcon(
-                  icon: Icons.remove,
+                  icon: Icons.add,
                   iconColor: Colors.white,
                   backgroundColor: Colors.blue,),
               ],
@@ -111,7 +124,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Dimensions.radius10*2),
                       color: Colors.white
                   ),
-                  child: BigText(text: '12,000원 | 장바구니 추가',),
+                  child: BigText(text: '\$ ${product.price!} | 장바구니 추가',),
                 )
               ],
             ),

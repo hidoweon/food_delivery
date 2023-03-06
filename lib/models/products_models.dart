@@ -26,12 +26,12 @@ class Product {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['total_size'] = _totalSize;
     data['type_id'] = _typeId;
     data['offset'] = _offset;
     if (products!= null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
+      data['products'] = products.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -75,7 +75,7 @@ class ProductModels {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['description'] = description;
